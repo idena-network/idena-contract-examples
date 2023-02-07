@@ -1,0 +1,29 @@
+{
+  "name": "shared-fungible-token-wallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests",
+    "asbuild:debug": "asc assembly/index.ts --target debug --disable bulk-memory",
+    "asbuild:release": "asc assembly/index.ts --target release --disable bulk-memory",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "build" : "asb --verbose -- --debug",
+    "start": "npx serve ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.21.6"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  },
+  "dependencies": {
+    "idena-sdk-as" : "0.0.25"
+  }
+}
