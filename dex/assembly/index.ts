@@ -14,7 +14,6 @@ import { Account } from "./account"
 import { compareAddress } from "./utils"
 import { SwapAction } from "./types"
 
-@idenaBindgen
 export class Dex {
   fee: u32
   owner: Address

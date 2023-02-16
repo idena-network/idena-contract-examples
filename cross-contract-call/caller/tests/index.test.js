@@ -54,7 +54,7 @@ it('can deploy and call invoke', async () => {
 
     expect(await provider.Contract.readData(sumFuncContractAddress, "sum", ContractArgumentFormat.Byte)).toBe(4)
 
-    expect(sumFuncContractCallInvokeReceipt.ActionResult.subActionResults[0].success).toBe(true)
-    expect(sumFuncContractCallInvokeReceipt.ActionResult.subActionResults[1].success).toBe(true)    
+    expect(sumFuncContractCallInvokeReceipt.actionResult.subActionResults[0].success).toBe(true)
+    expect(sumFuncContractCallInvokeReceipt.actionResult.subActionResults[1].success).toBe(true)    
 
 });

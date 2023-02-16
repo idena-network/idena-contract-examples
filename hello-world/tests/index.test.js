@@ -19,7 +19,7 @@ it("can deploy and call execute", async () => {
   await provider.Chain.resetTo(2)
 
   const deployTx = await provider.Contract.deploy(
-    "99999",
+    "0",
     "9999",
     code,
     Buffer.from("")
@@ -28,7 +28,7 @@ it("can deploy and call execute", async () => {
 
   const deployReceipt = await provider.Chain.receipt(deployTx)
   expect(deployReceipt.success).toBe(true)
-
+  console.log(deployReceipt)
   const tx = await provider.Contract.call(
     deployReceipt.contract,
     "hello",
@@ -45,6 +45,6 @@ it("can deploy and call execute", async () => {
 
   expect(receipt.events[0].event).toBe("Hello world!")
   expect(
-    new TextDecoder().decode(hexToUint8Array(receipt.ActionResult.outputData))
+    new TextDecoder().decode(hexToUint8Array(receipt.actionResult.outputData))
   ).toBe("hello world")
 })

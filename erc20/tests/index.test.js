@@ -140,7 +140,7 @@ it("can deploy and call transfer", async () => {
   receipt = await provider.Chain.receipt(allowanceTx)  
   expect(receipt.success).toBe(true)
   
-  expect(receipt.ActionResult.outputData).toBe("0x00000000000000000000000000000064")
+  expect(receipt.actionResult.outputData).toBe("0x00000000000000000000000000000064")
 
   let utf8Encode = new TextEncoder()
   const key = toHexString(god, false) + ":" + toHexString(dest, false)

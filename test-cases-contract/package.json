@@ -23,6 +23,6 @@
     }
   },
   "dependencies": {
-    "idena-sdk-as" : "0.0.20"
+    "idena-sdk-as" : "0.0.28"
   }
 }

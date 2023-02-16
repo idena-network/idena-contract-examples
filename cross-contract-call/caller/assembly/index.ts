@@ -1,7 +1,6 @@
 
 import { Address, Balance, Bytes, debug, Host, KeyValue } from "idena-sdk-as"
 
-@idenaBindgen
 export class Caller {
   function: Address
   sum : KeyValue<string, u64>

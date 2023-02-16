@@ -8,7 +8,6 @@ import {
   KeyValue,  
 } from "idena-sdk-as"
 
-@idenaBindgen
 export class SharedFungibleToken {
   owner: KeyValue<string, Address>
   root: KeyValue<string, Address>

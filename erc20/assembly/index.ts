@@ -8,12 +8,9 @@ import {
   util,
 } from "idena-sdk-as"
 
-//@ts-ignore
-@idenaBindgen
+
 export class IRC20 {
-  /**
-   *
-   */
+
   balances: PersistentMap<Address, Balance>
   approves: PersistentMap<string, Balance>  
 

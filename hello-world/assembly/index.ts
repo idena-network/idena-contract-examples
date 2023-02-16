@@ -1,21 +1,18 @@
-// The entry file of your WebAssembly module.
-
 import { Host, KeyValue } from "idena-sdk-as"
 
-@idenaBindgen
 export class HelloWorldContract {
 
   //stores value by separated key
   someProperty: KeyValue<string, string>
 
   //stores value as part of 'STATE' key
-  classField: string
+  classField: string  
 
   // executes while deploying contract
   constructor() {
     this.someProperty = new KeyValue("hello")
     this.someProperty.set("world")
-    this.classField = "hello"
+    this.classField = "hello"    
   }
 
   hello(): string {
@@ -26,3 +23,5 @@ export class HelloWorldContract {
     return this.classField + " " + this.someProperty.get("")
   }
 }
+
+

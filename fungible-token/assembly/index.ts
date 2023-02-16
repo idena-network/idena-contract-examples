@@ -8,7 +8,6 @@ import {
   util,
 } from "idena-sdk-as"
 
-@idenaBindgen
 export class FungibleToken {
   balances: PersistentMap<Address, Balance>
   total_supply: Balance

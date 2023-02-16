@@ -1861,26 +1861,26 @@ idena-assemblyscript-json@^0.0.2:
   resolved "https://registry.yarnpkg.com/idena-assemblyscript-json/-/idena-assemblyscript-json-0.0.2.tgz#a26241e0006038a21c66cbc45d05a765e29f3225"
   integrity sha512-j4JjBX/cLvIVliqdW1nERzsjFUPDSJ08axkj4Zuvbc9aAv1y0zGEdF0hRvWyFEJMGLzjjFD3H9btqIHF1B/neA==
 
-idena-sdk-as@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/idena-sdk-as/-/idena-sdk-as-0.0.26.tgz#33295899f880da662e769fab5cfcc3def0714925"
-  integrity sha512-OzT3YXog32HEgu3PSQkqzPfhEmrNGuxlz2wZvYVHGv7JzJIlvlI7avRaQTlYWl75O8CzinFLm101qA6e0mQEdA==
+idena-sdk-as@0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/idena-sdk-as/-/idena-sdk-as-0.0.28.tgz#a1f994eea943925d8ab5331a79ab72d884e73ae0"
+  integrity sha512-vzvrYXvJDBVdb9V9C+/mu5tVqeW9m/mI9aAYELaXkOyUnFt07/N3ZUVddkrRMtUxeOu8xeyEqTbnbI/sbw/o5Q==
   dependencies:
-    idena-sdk-bindgen "0.0.26"
-    idena-sdk-core "0.0.26"
-    idena-sdk-tests "0.0.26"
+    idena-sdk-bindgen "0.0.28"
+    idena-sdk-core "0.0.28"
+    idena-sdk-tests "0.0.28"
 
-idena-sdk-bindgen@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/idena-sdk-bindgen/-/idena-sdk-bindgen-0.0.26.tgz#b3ac19a107589354d8fca774d106623bbccaf05a"
-  integrity sha512-Z0pa17HFLbbtDIYC0th5hgdGqRoU+LGneUGbProGfJ/8eRc1r4aa64qTzEmyNxhvegkEQvO6rpengNpMzzjWIQ==
+idena-sdk-bindgen@0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/idena-sdk-bindgen/-/idena-sdk-bindgen-0.0.28.tgz#fd2bd8211452ac0f0e4ecb0a3cb528f0dc6058db"
+  integrity sha512-XSuB369wdHwoBnnAphRZQooJ6oZeweY3PDZJde2339xM8zACcftgr0bBqrBgx8v6p1OXFqbtebtjF5Lh5CX5/w==
   dependencies:
-    idena-sdk-core "0.0.26"
+    idena-sdk-core "0.0.28"
 
-idena-sdk-core@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/idena-sdk-core/-/idena-sdk-core-0.0.26.tgz#c95eb9755a3d4b80ba2596f872a1efe137267421"
-  integrity sha512-8SZEUHkI6XtwVHQ7hRYyFVrlihPEJztFkr3Rqctu8nQeDnzK4wWB7MDDZnrLqKopX0p2dOj23wUy9fG590lG7A==
+idena-sdk-core@0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/idena-sdk-core/-/idena-sdk-core-0.0.28.tgz#f84db65e1f6542ae0a287de602d7b0213873e3f3"
+  integrity sha512-CpBqdXKqFlU0FKHCHcl7yrzUT28SuQLehO4rt6uT1Sdr2NbCQAV7POtoc7IlQQScTGFACviWEHkHTLusVfafSw==
   dependencies:
     "@as-pect/cli" "^6.2.4"
     "@serial-as/borsh" "1.0.4"
@@ -1906,10 +1906,10 @@ idena-sdk-js@^0.1.0:
     protobufjs "^6.11.2"
     secp256k1 "^4.0.3"
 
-idena-sdk-tests@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/idena-sdk-tests/-/idena-sdk-tests-0.0.26.tgz#789553f4c7f97a043d354709710ce8797c000670"
-  integrity sha512-qPCN+CKDCf57Cb7Ig6izCSVHvuHATqitxH4IVTLtnZmdQMre6xeNPqedOeRlUG8nKGSMAAF6Z3RPr7fOT5d1pQ==
+idena-sdk-tests@0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/idena-sdk-tests/-/idena-sdk-tests-0.0.28.tgz#525bc754d684ea2e0e357865e707c893f0ecbb9f"
+  integrity sha512-gt1vEU99sJmjqCxh/iQbPEtBiXl4lQRD14nWsVC7A0h3HHaBvanV9cLAUovU/A5zgzUmtc6QkX2/lOZnvIt81Q==
   dependencies:
     axios "^0.27.2"
     idena-sdk-js "^0.1.0"

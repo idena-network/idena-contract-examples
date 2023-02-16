@@ -1,7 +1,6 @@
 import { Address, Balance, Bytes, debug, Host } from "idena-sdk-as";
 
 
-@idenaBindgen
 export class TestCases {
     contract : Address;
 

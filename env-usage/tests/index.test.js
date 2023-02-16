@@ -1,11 +1,10 @@
 const path = require("path")
 const fs = require("fs")
 
-const { toHexString, hexToUint8Array } = require("idena-sdk-js")
-
 const {
   ContractRunnerProvider,
   ContractArgumentFormat,
+  successOfAllActions
 } = require("idena-sdk-tests")
 
 it("can deploy and call execute", async () => {
@@ -25,7 +24,11 @@ it("can deploy and call execute", async () => {
   expect(deployReceipt.success).toBe(true)
 
 
-  const tx = await provider.Contract.call(
+  await provider.Chain.setContractData("0x0B00000000000000000000000000000000000000", "result", "1", "byte")
+
+  expect(await provider.Contract.readData("0x0B00000000000000000000000000000000000000", "result","byte")).toBe(1)
+
+  let tx = await provider.Contract.call(
     deployReceipt.contract,
     "execute",
     "0",
@@ -34,7 +37,7 @@ it("can deploy and call execute", async () => {
 
   await provider.Chain.generateBlocks(1)
 
-  const receipt = await provider.Chain.receipt(tx)
+  let receipt = await provider.Chain.receipt(tx)
   console.log(receipt)  
   expect(receipt.success).toBe(true)
 
@@ -46,4 +49,24 @@ it("can deploy and call execute", async () => {
   expect(receipt.events[2].args[1]).toBe(god)
 
 
+  expect(await provider.Chain.balance(deployReceipt.contract)).toBe("99998.5")  
+  expect(await provider.Chain.balance("0x0c00000000000000000000000000000000000000")).toBe("0.5")  
+
+  expect(successOfAllActions(receipt)).toBe(true);
+
+  tx = await provider.Contract.call(
+    deployReceipt.contract,
+    "execute2",
+    "0.000000000000000001",
+    "9999"   
+  )
+
+  await provider.Chain.generateBlocks(1)
+
+  receipt = await provider.Chain.receipt(tx)
+  
+  expect(receipt.success).toBe(true)
+  expect(await provider.Chain.balance(deployReceipt.contract)).toBe("99997.500000000000000001")  
+  expect(receipt.actionResult.subActionResults[0].success).toBe(false)  
 })
+  
