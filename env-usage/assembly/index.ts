@@ -96,7 +96,7 @@ export class Contract {
       [],
       BASE_IDNA,
       200000
-    ).then("panic", [],   BASE_IDNA, 100000)
+    ).then("panic", [], BASE_IDNA, 100000)
 
     Host.createDeployContractPromise(
       new Uint8Array(10),
@@ -105,16 +105,34 @@ export class Contract {
       BASE_IDNA,
       100000
     )
-    Host.burn(BASE_IDNA)  
+    Host.burn(BASE_IDNA)
 
-    assert(Host.ecrecover(new Bytes(1), new Bytes(65)).length == 0, "pubkey should be empty")
+    assert(
+      Host.ecrecover(new Bytes(1), new Bytes(65)).length == 0,
+      "pubkey should be empty"
+    )
 
-    const testMsg = util.decodeFromHex("0xce0677bb30baa8cf067c88db9811f4333d131bf8bcf12fe7065d211dce971008")
-    const testSig = util.decodeFromHex("0x90f27b8b488db00b00606796d2987f6a5f59ae62ea05effe84fef5b8b0e549984a691139ad57a3f0b906637673aa2f63d1f55cb1a69199d4009eea23ceaddc9301")
-    const testPubKey = "0x04e32df42865e97135acfb65f3bae71bdc86f4d49150ad6a440b6f15878109880a0a2b2667f7e725ceea70c673093bf67663e0312623c8e091b13cf2c0f11ef652"
-      
-    assert(util.toHexString(Host.ecrecover(testMsg, testSig), true) == testPubKey , "pubkeys should be equal")
-
+    const testMsg = util.decodeFromHex(
+      "0xce0677bb30baa8cf067c88db9811f4333d131bf8bcf12fe7065d211dce971008"
+    )
+    const testSig = util.decodeFromHex(
+      "0x90f27b8b488db00b00606796d2987f6a5f59ae62ea05effe84fef5b8b0e549984a691139ad57a3f0b906637673aa2f63d1f55cb1a69199d4009eea23ceaddc9301"
+    )
+    const testPubKey =
+      "0x04e32df42865e97135acfb65f3bae71bdc86f4d49150ad6a440b6f15878109880a0a2b2667f7e725ceea70c673093bf67663e0312623c8e091b13cf2c0f11ef652"
+    let recovered = Host.ecrecover(testMsg, testSig)
+    assert(
+      util.toHexString(recovered, true) == testPubKey,
+      "pubkeys should be equal"
+    )
+    let recoveredAddr = Address.fromBytes(
+      Host.keccac256(recovered.slice(1)).slice(12)
+    ).toHex()
+    
+    assert(
+      recoveredAddr == "a19d069d48d2e9392ec2bb41ecab0a72119d633b",
+      "address should be equal"
+    )
   }
 
   empty(): void {}
@@ -134,5 +152,31 @@ export class Contract {
     let r = Host.promiseResult()
     assert(!r.failed() && !r.empty(), "promise shoud be successful")
     assert(r.data.toU8() == 1, "data of promise should be 1")
+  }
+
+  execute3(): void {
+    Host.createCallFunctionPromise(
+      Context.contractAddress(),
+      "empty",
+      [],
+      BASE_IDNA,
+      2000000
+    ).then("panic", [], BASE_IDNA, 100000)
+
+    Host.createDeployContractPromise(
+      new Uint8Array(10),
+      [Bytes.fromBytes(new Uint8Array(1000))],
+      Bytes.fromString(""),
+      BASE_IDNA,
+      2000000
+    )
+
+    Host.createGetIdentityPromise(Address.fromBytes(new Uint8Array(20)), 100000)
+    Host.createReadContractDataPromise(
+      Context.contractAddress(),
+      new Uint8Array(10),
+      100000
+    )
+    throw new Error("panic")
   }
 }

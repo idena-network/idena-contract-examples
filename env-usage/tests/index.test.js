@@ -20,7 +20,7 @@ it("can deploy and call execute", async () => {
   const deployTx = await provider.Contract.deploy("99999", "9999", code, Buffer.from(""))
   await provider.Chain.generateBlocks(1)
 
-  const deployReceipt = await provider.Chain.receipt(deployTx)
+  const deployReceipt = await provider.Chain.receipt(deployTx)  
   expect(deployReceipt.success).toBe(true)
 
 
@@ -68,5 +68,21 @@ it("can deploy and call execute", async () => {
   expect(receipt.success).toBe(true)
   expect(await provider.Chain.balance(deployReceipt.contract)).toBe("99997.500000000000000001")  
   expect(receipt.actionResult.subActionResults[0].success).toBe(false)  
+
+
+  tx = await provider.Contract.call(
+    deployReceipt.contract,
+    "execute3",
+    "0",
+    "9999"   
+  )
+
+  await provider.Chain.generateBlocks(1)
+
+  receipt = await provider.Chain.receipt(tx)
+  console.log(receipt)
+  expect(receipt.success).toBe(false)
+  expect(receipt.gasUsed).toBe(7697)
+ 
 })
   
