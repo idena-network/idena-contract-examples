@@ -1,4 +1,5 @@
-# idena-contract-examples
+# idena-contract-examples [WIP]
+## Note: Example contracts are not ready for production use. Code may be bugged. The purpose of this repo is to show how to write and test contracts with idena-sdk-as.
 
 
 ## How to build
