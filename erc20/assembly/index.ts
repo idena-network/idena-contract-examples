@@ -39,10 +39,9 @@ export class IRC20 {
     )
     const fromAmount = this.getBalance(sender)
     util.assert(fromAmount >= amount, "not enough tokens on account")
-    let destBalance = this.getBalance(to)
-    let sum = destBalance + amount
     this.balances.set(sender, fromAmount - amount)
-    this.balances.set(to, sum)
+    let destBalance = this.getBalance(to)
+    this.balances.set(to, destBalance + amount)
   }
 
   approve(spender: Address, amount: Balance): void {
@@ -68,9 +67,8 @@ export class IRC20 {
       "not enough tokens approved to transfer"
     )
 
-    let destBalance = this.getBalance(to)
-
     this.balances.set(from, fromAmount - amount)
+    let destBalance = this.getBalance(to)
     this.balances.set(to, destBalance + amount)
   }
 }
