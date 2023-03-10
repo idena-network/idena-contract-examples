@@ -16,13 +16,12 @@ export class IRC20 {
   _name: string = "TOKEN NAME"
   _symbol: string = "TOKEN SYMBOL"
   _decimals: u8 = 18
-  _totalSupply: Balance
+  _totalSupply: Balance = Balance.fromString("1000000000000000000000000000") // 1000000000 tokens with 18 decimal places
 
   constructor() {
-    const TOTAL_SUPPLY: Balance = Balance.from(1000000000)
     this.balances = PersistentMap.withStringPrefix<Address, Balance>("b:");
     this.approves = PersistentMap.withStringPrefix<string, Balance>("a:");    
-    this.balances.set(Context.caller(), TOTAL_SUPPLY);        
+    this.balances.set(Context.caller(), _totalSupply);        
   }
 
   @view
