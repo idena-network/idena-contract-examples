@@ -1,7 +1,9 @@
 
 import {
-  Address,  
+  Address,
+  Bytes,
   Context,
+  Host,
   debug,  
   Balance,
   PersistentMap,  
@@ -20,8 +22,10 @@ export class IRC20 {
 
   constructor() {
     this.balances = PersistentMap.withStringPrefix<Address, Balance>("b:");
-    this.approves = PersistentMap.withStringPrefix<string, Balance>("a:");    
-    this.balances.set(Context.caller(), _totalSupply);        
+    this.approves = PersistentMap.withStringPrefix<string, Balance>("a:");
+    const caller = Context.caller()
+    this.balances.set(caller, this._totalSupply);
+    this.emitTransferEvent(new Address(0), caller, this._totalSupply)
   }
 
   @view
@@ -45,6 +49,7 @@ export class IRC20 {
     this.balances.set(sender, fromAmount - amount)
     let destBalance = this.getBalance(to)
     this.balances.set(to, destBalance + amount)
+    this.emitTransferEvent(sender, to, amount)
   }
 
   approve(spender: Address, amount: Balance): void {
@@ -90,5 +95,14 @@ export class IRC20 {
     this.balances.set(from, fromAmount - amount)
     let destBalance = this.getBalance(to)
     this.balances.set(to, destBalance + amount)
+    this.emitTransferEvent(from, to, amount)
+  }
+
+  private emitTransferEvent(from: Address, to: Address, amount: Balance): void {
+    Host.emitEvent("transfer", [
+      from,
+      to,
+      Bytes.fromBytes(amount.toBytes()),
+    ])
   }
 }
