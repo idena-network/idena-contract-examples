@@ -13,12 +13,15 @@ export class IRC20 {
 
   balances: PersistentMap<Address, Balance>
   approves: PersistentMap<string, Balance>  
+  _name: string = "TOKEN NAME"
+  _symbol: string = "TOKEN SYMBOL"
+  _decimals: u8 = 18
+  _totalSupply: Balance = Balance.fromString("1000000000000000000000000000") // 1000000000 tokens with 18 decimal places
 
   constructor() {
-    const TOTAL_SUPPLY: Balance = Balance.from(1000000000)
     this.balances = PersistentMap.withStringPrefix<Address, Balance>("b:");
     this.approves = PersistentMap.withStringPrefix<string, Balance>("a:");    
-    this.balances.set(Context.caller(), TOTAL_SUPPLY);        
+    this.balances.set(Context.caller(), _totalSupply);        
   }
 
   @view
@@ -55,7 +58,24 @@ export class IRC20 {
     log(`key hex=${util.toHexString(util.stringToBytes(key))}`)
     return this.approves.get(key, Balance.from(0))
   }
-
+  
+  @view 
+  totalSupply(): Balance {
+    return this._totalSupply
+  }
+  @view
+  name(): string {
+    return this._name
+  }
+  @view
+  symbol(): string {
+    return this._symbol
+  }
+  @view
+  decimals(): u8 {
+    return this._decimals
+  }
+  
   transferFrom(from: Address, to: Address, amount: Balance): void {
     let caller = Context.caller()
 
