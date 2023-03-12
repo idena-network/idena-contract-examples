@@ -55,6 +55,7 @@ export class IRC20 {
   approve(spender: Address, amount: Balance): void {
     let sender = Context.caller()    
     this.approves.set(sender.toHex() + ":" + spender.toHex(), amount)
+    this.emitApprovalEvent(sender, spender, amount)
   }
 
   @view
@@ -103,6 +104,14 @@ export class IRC20 {
       from,
       to,
       Bytes.fromBytes(amount.toBytes()),
+    ])
+  }
+  
+  private emitApprovalEvent(owner: Address, spender: Address, amount: Balance): void{
+    Host.emitEvent("approval", [
+      owner,
+      spender,
+      Bytes.fromBytes(amount.toBytes())
     ])
   }
 }
