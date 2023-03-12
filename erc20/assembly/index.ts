@@ -92,7 +92,8 @@ export class IRC20 {
       amount <= approvedAmount,
       "not enough tokens approved to transfer"
     )
-
+    
+    this.approves.set(from.toHex() + ":" + caller.toHex(), approvedAmount - amount)
     this.balances.set(from, fromAmount - amount)
     let destBalance = this.getBalance(to)
     this.balances.set(to, destBalance + amount)
