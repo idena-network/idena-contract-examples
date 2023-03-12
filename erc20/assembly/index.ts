@@ -55,6 +55,7 @@ export class IRC20 {
   approve(spender: Address, amount: Balance): void {
     let sender = Context.caller()    
     this.approves.set(sender.toHex() + ":" + spender.toHex(), amount)
+    this.emitApprovalEvent(sender, spender, amount)
   }
 
   @view
@@ -91,7 +92,8 @@ export class IRC20 {
       amount <= approvedAmount,
       "not enough tokens approved to transfer"
     )
-
+    
+    this.approves.set(from.toHex() + ":" + caller.toHex(), approvedAmount - amount)
     this.balances.set(from, fromAmount - amount)
     let destBalance = this.getBalance(to)
     this.balances.set(to, destBalance + amount)
@@ -103,6 +105,14 @@ export class IRC20 {
       from,
       to,
       Bytes.fromBytes(amount.toBytes()),
+    ])
+  }
+  
+  private emitApprovalEvent(owner: Address, spender: Address, amount: Balance): void{
+    Host.emitEvent("approval", [
+      owner,
+      spender,
+      Bytes.fromBytes(amount.toBytes())
     ])
   }
 }
