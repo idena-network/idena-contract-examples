@@ -34,7 +34,7 @@ export class SharedFungibleToken {
 
     let root = this.root.get(new Address(0));
     
-    Host.createDeployContractPromise(Context.contractCode(), [recipient, root], new Bytes(0), Balance.from(0), 700000).then(
+    Host.createDeployContractPromise(Context.contractCode(), [recipient, root], new Bytes(0), Balance.from(0), 3500000).then(
         "_deploy_wallet_callback", [recipient, Bytes.fromBytes(amount.toBytes()) ], Balance.from(0), 8500000
     );    
   }

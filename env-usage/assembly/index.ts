@@ -31,13 +31,14 @@ export class Contract {
 
     Host.emitEvent("hash of data", [hash])
 
-    let header = Host.blockHeader(2)
+    let header = Host.blockHeader(2) 
+   
     assert(header.proposedHeader!.height == 2, "block is not found")
     assert(header.proposedHeader!.blockSeed.length > 0, "block seed is empty")
     assert(
       header.proposedHeader!.parentHash.length > 0,
       "block parent hash is empty"
-    )
+    )    
     Host.createCallFunctionPromise(
       Context.contractAddress(),
       "emitEvents",
@@ -76,7 +77,7 @@ export class Contract {
       30000
     ).then("_read__contract_data_callback", [], Balance.Zero, 200000)
   }
-
+  
   execute2(): void {
     log(`dd=${Context.contractBalance().toString()}`)
     assert(Context.payAmount() == Balance.from(1))
@@ -141,9 +142,11 @@ export class Contract {
     throw new Error("panic")
   }
 
+  @privateMethod
   emitEvents(): void {
     Host.emitEvent("some-event", [Context.caller(), Context.originalCaller()])
   }
+  @privateMethod
   _callback(): void {
     Host.emitEvent("some-event2", [Context.caller(), Context.originalCaller()])
   }
@@ -153,7 +156,7 @@ export class Contract {
     assert(!r.failed() && !r.empty(), "promise shoud be successful")
     assert(r.data.toU8() == 1, "data of promise should be 1")
   }
-
+  
   execute3(): void {
     Host.createCallFunctionPromise(
       Context.contractAddress(),
@@ -161,7 +164,7 @@ export class Contract {
       [],
       BASE_IDNA,
       2000000
-    ).then("panic", [], BASE_IDNA, 100000)
+    ).then("panic", [], BASE_IDNA, 2000000)
 
     Host.createDeployContractPromise(
       new Uint8Array(10),
@@ -178,5 +181,5 @@ export class Contract {
       100000
     )
     throw new Error("panic")
-  }
+  }  
 }

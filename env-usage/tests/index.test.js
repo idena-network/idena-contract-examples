@@ -82,7 +82,7 @@ it("can deploy and call execute", async () => {
   receipt = await provider.Chain.receipt(tx)
   console.log(receipt)
   expect(receipt.success).toBe(false)
-  expect(receipt.gasUsed).toBe(7697)
+  expect(receipt.gasUsed).toBe(6697)
  
 })
   
